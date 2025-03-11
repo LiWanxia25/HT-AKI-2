@@ -38,9 +38,16 @@ Post_CPB_CVP_12_time = st.number_input("Post_CPB_CVP > 12 time (min):", min_valu
 feature_values = [PASP,Pre_hemoglobin,LAD,ACC_duration,Intra_urine_output,MAP_65_time,Post_CPB_MAP_AUT_65,Post_CPB_CVP_12_time]
 features = np.array([feature_values])
 
+# 关键修改：使用 pandas DataFrame 来确保列名
+features_df = pd.DataFrame(features, columns=feature_names)
+standardized_features_1 = scaler.transform(features_df)
+
+# 关键修改：确保 final_features 是一个二维数组，并且用 DataFrame 传递给模型
+standardized_features = pd.DataFrame(standardized_features_1, columns=feature_names)
+
 if st.button("Predict"):    
     # 标准化特征
-    standardized_features = scaler.transform(features)
+    # standardized_features = scaler.transform(features)
 
     # Predict class and probabilities    
     predicted_class = model.predict(standardized_features)[0]   
