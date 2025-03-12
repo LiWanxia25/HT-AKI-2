@@ -55,21 +55,22 @@ if st.button("Predict"):
 
     # Display prediction results    
     st.write(f"**Predicted Class:** {predicted_class} (1: Disease, 0: No Disease)")   
-    st.write(f"**Prediction Probabilities:** {predicted_proba}")
+    formatted_proba = ", ".join(f"{prob:.2f}" for prob in predicted_proba)
+    st.write(f"**Prediction Probabilities:** {formatted_proba}")
 
     # Generate advice based on prediction results  
      if predicted_class == 1:        
-         advice = (            
-                f"According to our model prediction, you have a high risk of AKI after heart transplant surgery. "            
-                f"The model predicts that your probability of having AKI is {probability:.1f}%. "            
-                "It's advised to consult with your healthcare provider for further evaluation and possible intervention."        
-          )    
+        advice = (            
+            f"According to the model, you are at high risk of developing acute kidney injury (AKI) after heart transplant surgery. "            
+            f"The model predicts a {probability:.1f}% probability of AKI. "            
+            "It is recommended to closely monitor kidney function indicators and maintain communication with your medical team for timely prevention or intervention."        
+        )    
     else:        
-         advice = (           
-                f"According to our model prediction, you have a low risk of heart disease. "            
-                f"The model predicts that your probability of not having heart disease is {probability:.1f}%. "            
-                "However, maintaining a healthy lifestyle is important. Please continue regular check-ups with your healthcare provider."        
-          )    
+        advice = (           
+            f"According to the model, you are at low risk of developing acute kidney injury (AKI) after heart transplant surgery. "            
+            f"The model predicts a {probability:.1f}% probability of not developing AKI. "            
+            "However, it is still important to closely monitor kidney function post-surgery and follow the guidance of your medical team to ensure a smooth recovery."        
+        )      
     st.write(advice)
 
     # SHAP Explanation
