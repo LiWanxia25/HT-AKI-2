@@ -58,6 +58,7 @@ if st.button("Predict"):
     formatted_proba = ", ".join(f"{prob:.2f}" for prob in predicted_proba)
     st.write(f"**Prediction Probabilities:** {formatted_proba}")
 
+    probability = predicted_proba[predicted_class] * 100
     # Generate advice based on prediction results  
     if predicted_class == 1:        
         advice = (            
