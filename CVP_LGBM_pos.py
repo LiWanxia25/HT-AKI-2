@@ -91,11 +91,8 @@ if st.button("Predict"):
             shap.force_plot(explainer_shap.expected_value[1], shap_values[1], original_feature_values, matplotlib=True)
         else:
             shap.force_plot(explainer_shap.expected_value[0], shap_values[0], original_feature_values, matplotlib=True)
-    else:  # 如果是三维数组（多分类模型）
-        if predicted_class == 1:
-            shap.force_plot(explainer_shap.expected_value[1], shap_values[:, :, 1], original_feature_values, matplotlib=True)
-        else:
-            shap.force_plot(explainer_shap.expected_value[0], shap_values[:, :, 0], original_feature_values, matplotlib=True)
+    else:  # 如果是 NumPy 数组（回归模型或单输出模型）
+        shap.force_plot(explainer_shap.expected_value, shap_values, original_feature_values, matplotlib=True)
     
     # 保存并显示图像
     plt.savefig("shap_force_plot.png", bbox_inches='tight', dpi=1200)
