@@ -54,20 +54,19 @@ if st.button("Predict"):
     predicted_proba = model.predict_proba(standardized_features)[0]
 
     # Display prediction results    
-    st.write(f"**Predicted Class:** {predicted_class}(1: Disease, 0: No Disease)")   
+    st.write(f"**Predicted Class:** {predicted_class} (1: Disease, 0: No Disease)")   
     st.write(f"**Prediction Probabilities:** {predicted_proba}")
 
     # Generate advice based on prediction results  
-    probability = predicted_proba[predicted_class] * 100
-    if predicted_class == 1:        
+     if predicted_class == 1:        
          advice = (            
-                f"According to our model, you have a high risk of heart disease. "            
-                f"The model predicts that your probability of having heart disease is {probability:.1f}%. "            
+                f"According to our model prediction, you have a high risk of AKI after heart transplant surgery. "            
+                f"The model predicts that your probability of having AKI is {probability:.1f}%. "            
                 "It's advised to consult with your healthcare provider for further evaluation and possible intervention."        
           )    
     else:        
          advice = (           
-                f"According to our model, you have a low risk of heart disease. "            
+                f"According to our model prediction, you have a low risk of heart disease. "            
                 f"The model predicts that your probability of not having heart disease is {probability:.1f}%. "            
                 "However, maintaining a healthy lifestyle is important. Please continue regular check-ups with your healthcare provider."        
           )    
