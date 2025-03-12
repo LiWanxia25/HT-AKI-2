@@ -79,10 +79,23 @@ if st.button("Predict"):
     shap_values = explainer_shap.shap_values(pd.DataFrame(standardized_features, columns=feature_names))    
 # 将标准化前的原始数据存储在变量中
     original_feature_values = pd.DataFrame(features, columns=feature_names)
-# Display the SHAP force plot for the predicted class    
-    if predicted_class == 1:        
-        shap.force_plot(explainer_shap.expected_value[1], shap_values[1], original_feature_values, matplotlib=True)    
-    else:        
-        shap.force_plot(explainer_shap.expected_value[0], shap_values[0], original_feature_values, matplotlib=True)    
-    plt.savefig("shap_force_plot.png", bbox_inches='tight', dpi=1200)    
-    st.image("shap_force_plot.png", caption='SHAP Force Plot Explanation')
+
+# 检查 shap_values 的格式
+print("SHAP values type:", type(shap_values))
+print("SHAP values shape:", [np.shape(v) for v in shap_values] if isinstance(shap_values, list) else np.shape(shap_values))
+
+# 根据 shap_values 的格式调整代码
+if isinstance(shap_values, list):  # 如果是列表（二分类模型）
+    if predicted_class == 1:
+        shap.force_plot(explainer_shap.expected_value[1], shap_values[1], original_feature_values, matplotlib=True)
+    else:
+        shap.force_plot(explainer_shap.expected_value[0], shap_values[0], original_feature_values, matplotlib=True)
+else:  # 如果是三维数组（多分类模型）
+    if predicted_class == 1:
+        shap.force_plot(explainer_shap.expected_value[1], shap_values[:, :, 1], original_feature_values, matplotlib=True)
+    else:
+        shap.force_plot(explainer_shap.expected_value[0], shap_values[:, :, 0], original_feature_values, matplotlib=True)
+
+# 保存并显示图像
+plt.savefig("shap_force_plot.png", bbox_inches='tight', dpi=1200)
+st.image("shap_force_plot.png", caption='SHAP Force Plot Explanation')
