@@ -81,8 +81,8 @@ if st.button("Predict"):
     original_feature_values = pd.DataFrame(features, columns=feature_names)
 # Display the SHAP force plot for the predicted class    
     if predicted_class == 1:        
-        shap.force_plot(explainer_shap.expected_value[1], shap_values[:,:,1], original_feature_values, matplotlib=True)    
+        shap.force_plot(explainer_shap.expected_value[1], shap_values[1], original_feature_values, matplotlib=True)    
     else:        
-        shap.force_plot(explainer_shap.expected_value[0], shap_values[:,:,0], original_feature_values, matplotlib=True)    
+        shap.force_plot(explainer_shap.expected_value[0], shap_values[0], original_feature_values, matplotlib=True)    
     plt.savefig("shap_force_plot.png", bbox_inches='tight', dpi=1200)    
     st.image("shap_force_plot.png", caption='SHAP Force Plot Explanation')
