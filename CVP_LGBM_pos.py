@@ -59,7 +59,7 @@ if st.button("Predict"):
     st.write(f"**Prediction Probabilities:** {formatted_proba}")
 
     # Generate advice based on prediction results  
-     if predicted_class == 1:        
+    if predicted_class == 1:        
         advice = (            
             f"According to the model, you are at high risk of developing acute kidney injury (AKI) after heart transplant surgery. "            
             f"The model predicts a {probability:.1f}% probability of AKI. "            
