@@ -73,12 +73,13 @@ if st.button("Predict"):
           )    
     st.write(advice)
 
-# SHAP Explanation    
-    st.subheader("SHAP Force Plot Explanation")    
-    explainer_shap = shap.TreeExplainer(model)    
-    shap_values = explainer_shap.shap_values(pd.DataFrame(standardized_features, columns=feature_names))    
+# SHAP Explanation
+st.subheader("SHAP Force Plot Explanation")
+explainer_shap = shap.TreeExplainer(model)
+shap_values = explainer_shap.shap_values(pd.DataFrame(standardized_features, columns=feature_names))
+
 # 将标准化前的原始数据存储在变量中
-    original_feature_values = pd.DataFrame(features, columns=feature_names)
+original_feature_values = pd.DataFrame(features, columns=feature_names)
 
 # 检查 shap_values 的格式
 print("SHAP values type:", type(shap_values))
