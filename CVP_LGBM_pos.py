@@ -54,7 +54,7 @@ if st.button("Predict"):
     predicted_proba = model.predict_proba(standardized_features)[0]
 
     # Display prediction results    
-    st.write(f"**Predicted Class:** {predicted_class} (1: Disease, 0: No Disease)")   
+    st.write(f"**Predicted Class:** {predicted_class} (0: No Disease, 1: Disease)")   
     formatted_proba = ", ".join(f"{prob:.2f}" for prob in predicted_proba)
     st.write(f"**Prediction Probabilities:** {formatted_proba}")
 
